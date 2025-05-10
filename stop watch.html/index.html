@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: lightsalmon;
+      }
+      #stopwatch {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      h3 {
+        font-size: 50px;
+        color: darkmagenta;
+      }
+      button {
+        padding: 10px 15px;
+        border-radius: 10px;
+        border: none;
+        color: white;
+        cursor: pointer;
+        background-color: rgba(46, 139, 86, 0.514);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="stopwatch">
+      <h3 id="display"></h3>
+      <div>
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  // stopwatch
+
+  // setInterval()
+  // setTimeout()
+  // clearInterval()
+
+  let second = 0;
+  let minute = 0;
+  let hour = 0;
+  let timer;
+
+  // const updateDisplay = () => {
+  document.getElementById("display").innerHTML = `${hour
+    .toString()
+    .padStart(2, "0")}:${minute.toString().padStart(2, "0")}:${second
+    .toString()
+    .padStart(2, "0")}`;
+  // };
+
+  document.getElementById("start").addEventListener("click", () => {
+    timer = setInterval(() => {
+      second++;
+      // console.log(second);
+
+      if (second === 60) {
+        second = 0;
+        minute++;
+        // console.log("Minute " + minute);
+      }
+
+      if (minute === 60) {
+        minute = 0;
+        hour++;
+      }
+      // updateDisplay();
+      document.getElementById("display").innerHTML = `${hour
+        .toString()
+        .padStart(2, "0")}:${minute.toString().padStart(2, "0")}:${second
+        .toString()
+        .padStart(2, "0")}`;
+    }, 1000);
+  });
+
+  document.getElementById("stop").addEventListener("click", () => {
+    clearInterval(timer);
+  });
+
+  document.getElementById("reset").addEventListener("click", () => {
+    clearInterval(timer);
+    second = 0;
+    minute = 0;
+    hour = 0;
+    // updateDisplay();
+    document.getElementById("display").innerHTML = `${hour
+      .toString()
+      .padStart(2, "0")}:${minute.toString().padStart(2, "0")}:${second
+      .toString()
+      .padStart(2, "0")}`;
+  });
+
+  // updateDisplay();
+
+  //create
+  function test() {
+    console.log("Hello");
+  }
+
+  //call
+  test();
+</script>
